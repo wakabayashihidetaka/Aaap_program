@@ -1,9 +1,11 @@
 from django.db import models
 
+#Create your models here.
+
 class User(models.Model):
     class Meta:
         db_table = 'user'
-    user_id = models.PrimaryKey(blank=False, null=False)
+    user_id = models.IntegerField(blank=False, null=False, primary_key=True)
     user_name = models.CharField(blank=False, null=False, max_length=25)
     company_id = models.IntegerField(blank=False, null=False)
     department_id = models.IntegerField(blank=False, null=False)
@@ -13,11 +15,11 @@ class User(models.Model):
     updated_datetime = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.title
+        return self.user
 
 class AssessmentAnswer(models.Model):
-    answer_id = models.PrimaryKey(blank=False, null=False)
-    user_id = models.ForeiginKey(blank=False, null=False)
+    answer_id = models.IntegerField(blank=False, null=False, primary_key=True)
+    user_id = models.ForeignKey(User, on_delete=models.PROTECT)
     question1_answer = models.IntegerField(blank=False, null=False)
     question2_answer = models.IntegerField(blank=False, null=False)
     question3_answer = models.IntegerField(blank=False, null=False)
@@ -42,11 +44,11 @@ class AssessmentAnswer(models.Model):
     updated_datetime = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.title
+        return self.answer
 
 class AssessmentOutput(models.Model):
-    output_id = models.PrimaryKey(blank=False, null=False)
-    answer_id = models.ForeiginKey(blank=False, null=False)
+    output_id = models.IntegerField(blank=False, null=False, primary_key=True)
+    answer_id = models.ForeignKey(AssessmentAnswer, on_delete=models.PROTECT)
     type1_id = models.IntegerField(blank=False, null=False)
     type2_id = models.IntegerField(blank=False, null=False)
     type3_id = models.IntegerField(blank=False, null=False)
@@ -56,4 +58,4 @@ class AssessmentOutput(models.Model):
     updated_datetime = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.title# Create your models here.
+        return self.output
