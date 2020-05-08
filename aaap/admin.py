@@ -18,7 +18,7 @@ class AssessmentAnswerAdmin(admin.ModelAdmin):
 admin.site.register(AssessmentAnswer, AssessmentAnswerAdmin)
 
 class AssessmentOutputAdmin(admin.ModelAdmin):
-    list_display = ('output_id', 'answer_name', 'tyoe1_id', 'type2_id')
-    list_display_links = ('output_id', 'answer_name')
+    list_display = ('output_id', 'answer_id', 'type1_id', 'type2_id')
+    list_display_links = ('output_id', 'answer_id')
 
-admin.site.register(AssessmentAnswer, AssessmentAnswerAdmin)
+admin.site.register(AssessmentOutput, AssessmentOutputAdmin)
